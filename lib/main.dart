@@ -99,6 +99,13 @@ class _MyHomePageState extends State<MyHomePage> {
               'BMI wynosi: ${_result}${_group}',
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
+            Text(
+              '$_group',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 20
+              ),
+            ),
             Padding(padding: EdgeInsets.only(top: 10)),
             Text('$_error')
           ]),
@@ -113,21 +120,21 @@ class _MyHomePageState extends State<MyHomePage> {
       double hight = double.parse(_heightOfBodyController.text) / 100;
       double result = weight / (hight * hight);
       if (result < 16) {
-        _group = '(wygłodzenie)';
-      }else if (result >= 16 && result < 17) {
-        _group = '(wychudzenie)';
+        _group = 'wygłodzenie';
+      } else if (result >= 16 && result < 17) {
+        _group = 'wychudzenie';
       } else if (result >= 17 && result < 18.6) {
-        _group = '(niedowaga)';
+        _group = 'niedowaga';
       } else if (result >= 18.6 && result < 25) {
         _group = '(waga prawidłowa)';
       } else if (result >= 25 && result < 30) {
-        _group = '(nadwaga)';
+        _group = 'nadwaga';
       } else if (result >= 30 && result < 35) {
-        _group = '(otyłość I stopnia)';
-      } else if (result >= 35 && result < 40){
-        _group = '(otyłość II stopnia)';
-      } else if (result >= 40){
-        _group = '(otyłość III stopnia)';
+        _group = 'otyłość I stopnia';
+      } else if (result >= 35 && result < 40) {
+        _group = 'otyłość II stopnia';
+      } else if (result >= 40) {
+        _group = 'otyłość III stopnia';
       }
       _result = result.toStringAsFixed(2);
     } else {
