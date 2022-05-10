@@ -99,13 +99,13 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                     onPressed: CalculateYourBmi,
                     style:
-                        ElevatedButton.styleFrom(primary: Colors.),
+                        ElevatedButton.styleFrom(primary: Colors.blue),
                     child:
                         const Text('Oblicz', style: TextStyle(fontSize: 18))),
                 Padding(padding: EdgeInsets.only(top: 10)),
                 Text(
                   'BMI wynosi: ${_result}${_group}',
-                  style: TextStyle(fontSize: 20, color: Colors.white),
+                  style: TextStyle(fontSize: 20, color: Colors.indigo),
                 ),
                 Text(
                   '$_group',
