@@ -55,61 +55,66 @@ class _MyHomePageState extends State<MyHomePage> {
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
     return Scaffold(
-        appBar: AppBar(
-          title: Text('kalkulator bmi'),
-          backgroundColor: Colors.black,
-          foregroundColor: Colors.white,
-        ),
-        body: Center(
-            child: SingleChildScrollView(
-          child: Column(children: [
-            Padding(padding: EdgeInsets.only(top: 20)),
-            Text(
-              'Podaj wagę w kg:',
-              style: TextStyle(fontSize: 18, color: Colors.black),
-            ),
-            Container(
-              width: 150,
-              height: 25,
-              child: TextField(
-                controller: _weightOfBodyController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(border: OutlineInputBorder()),
+        body: Container(
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                begin: Alignment.topRight,
+                end: Alignment.bottomLeft,
+                colors: [
+                  Colors.blue,
+                  Colors.red
+                ]
               ),
             ),
-            Padding(padding: EdgeInsets.only(top: 5)),
-            Text('Podaj wzrost w cm:',
-                style: TextStyle(fontSize: 18, color: Colors.black)),
-            Container(
-              width: 150,
-              height: 25,
-              child: TextField(
-                controller: _heightOfBodyController,
-                keyboardType: TextInputType.number,
-                decoration: InputDecoration(border: OutlineInputBorder()),
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            ElevatedButton(
-                onPressed: CalculateYourBmi,
-                style: ElevatedButton.styleFrom(primary: Colors.orangeAccent),
-                child: const Text('Oblicz', style: TextStyle(fontSize: 18))),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            Text(
-              'BMI wynosi: ${_result}${_group}',
-              style: TextStyle(fontSize: 20, color: Colors.black),
-            ),
-            Text(
-              '$_group',
-              style: TextStyle(
-                color: Colors.black,
-                fontSize: 20
-              ),
-            ),
-            Padding(padding: EdgeInsets.only(top: 10)),
-            Text('$_error')
-          ]),
-        )));
+            child: Center(
+                child: SingleChildScrollView(
+              child: Column(children: [
+                Padding(padding: EdgeInsets.only(top: 20)),
+                Text(
+                  'Podaj wagę w kg:',
+                  style: TextStyle(fontSize: 18, color: Colors.white),
+                ),
+                Container(
+                  width: 150,
+                  height: 25,
+                  child: TextField(
+                    controller: _weightOfBodyController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(border: OutlineInputBorder()),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(top: 5)),
+                Text('Podaj wzrost w cm:',
+                    style: TextStyle(fontSize: 18, color: Colors.white)),
+                Container(
+                  width: 150,
+                  height: 25,
+                  child: TextField(
+                    controller: _heightOfBodyController,
+                    keyboardType: TextInputType.number,
+                    decoration: InputDecoration(border: OutlineInputBorder()),
+                  ),
+                ),
+                Padding(padding: EdgeInsets.only(top: 10)),
+                ElevatedButton(
+                    onPressed: CalculateYourBmi,
+                    style:
+                        ElevatedButton.styleFrom(primary: Colors.),
+                    child:
+                        const Text('Oblicz', style: TextStyle(fontSize: 18))),
+                Padding(padding: EdgeInsets.only(top: 10)),
+                Text(
+                  'BMI wynosi: ${_result}${_group}',
+                  style: TextStyle(fontSize: 20, color: Colors.white),
+                ),
+                Text(
+                  '$_group',
+                  style: TextStyle(color: Colors.white, fontSize: 20),
+                ),
+                Padding(padding: EdgeInsets.only(top: 10)),
+                Text('$_error')
+              ]),
+            ))));
   }
 
   void CalculateYourBmi() async {
