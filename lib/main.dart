@@ -44,6 +44,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _weightOfBodyController = TextEditingController();
   String _result = '';
   String _error = '';
+  String _group = '';
 
   @override
   Widget build(BuildContext context) {
@@ -95,7 +96,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: const Text('Oblicz', style: TextStyle(fontSize: 18))),
             Padding(padding: EdgeInsets.only(top: 10)),
             Text(
-              'BMI wynosi: ${_result}\n',
+              'BMI wynosi: ${_result}\n${_group}',
               style: TextStyle(fontSize: 20, color: Colors.black),
             ),
             Padding(padding: EdgeInsets.only(top: 10)),
@@ -104,21 +105,33 @@ class _MyHomePageState extends State<MyHomePage> {
         )));
   }
 
-  void CalculateYourBmi() async{
+  void CalculateYourBmi() async {
     String error = 'Wprowadź poprawne wartości';
 
-
-    if (!_heightOfBodyController.text.isEmpty){
+    if (!_heightOfBodyController.text.isEmpty) {
       double weight = double.parse(_weightOfBodyController.text);
       double hight = double.parse(_heightOfBodyController.text) / 100;
       double result = weight / (hight * hight);
+      if (result < 16) {
+        _group = 'wygłodzenie';
+      } else if (result >= 16 && result < 17) {
+        _group = 'wychudzenie';
+      } else if (result >= 17 && result < 18.6) {
+        _group = 'niedowaga';
+      } else if (result >= 18.6 && result < 25) {
+        _group = result.toStringAsFixed(2);
+      } else if (result >= 25 && result < 30) {
+        _group = 'nadwaga';
+      } else if (result >= 30 && result < 35) {
+        _group = 'otyłość I stopnia';
+      } else if (result >= 35 && result < 40){
+        _group = 'otyłość II stopnia';
+      } else if (result >= 40){
+        _group = 'otyłość III stopnia';
+      }
       _result = result.toStringAsFixed(2);
-      print("nie ok");
-    }
-    else{
+    } else {
       _error = error;
-      print("ok");
-
     }
     setState(() {});
   }
