@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -44,7 +43,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _weightOfBodyController = TextEditingController();
   String _result = '';
   String _error = '';
-  String _group = '';
+  String _group = 'waga prawidłowa';
 
   @override
   Widget build(BuildContext context) {
@@ -56,16 +55,7 @@ class _MyHomePageState extends State<MyHomePage> {
     // than having to individually change instances of widgets.
     return Scaffold(
         body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Colors.blue,
-                  Colors.red
-                ]
-              ),
-            ),
+            decoration: BoxDecoration(gradient: GetGradientByGroup(_group)),
             child: Center(
                 child: SingleChildScrollView(
               child: Column(children: [
@@ -98,8 +88,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 Padding(padding: EdgeInsets.only(top: 10)),
                 ElevatedButton(
                     onPressed: CalculateYourBmi,
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.blue),
+                    style: ElevatedButton.styleFrom(primary: Colors.blue),
                     child:
                         const Text('Oblicz', style: TextStyle(fontSize: 18))),
                 Padding(padding: EdgeInsets.only(top: 10)),
@@ -117,6 +106,37 @@ class _MyHomePageState extends State<MyHomePage> {
             ))));
   }
 
+  LinearGradient? GetGradientByGroup(String _group) {
+    if (_group == 'wyglodzenie' || _group == 'wychudzenie') {
+      return LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [new Color(0xff3519c2), new Color(0xff4c7ef2)]);
+    } else if (_group == 'niedowaga') {
+      return LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [new Color(0xff1552dd), new Color(0xff4cb4f2)]);
+    } else if (_group == 'waga prawidłowa') {
+      return LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [new Color(0xff21F32BFF), new Color(0xff8BF56DFF)]);
+    } else if (_group == 'nadwaga') {
+      return LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [new Color(0xffAD0202FF), new Color(0xffff0000)]);
+    } else if (_group == 'otyłość I stopnia' ||
+        _group == 'otyłość II stopnia' ||
+        _group == 'otyłość III stopnia') {
+      return LinearGradient(
+          begin: Alignment.bottomCenter,
+          end: Alignment.topCenter,
+          colors: [new Color(0xff6c0b0b), new Color(0xffc21919)]);
+    }
+  }
+
   void CalculateYourBmi() async {
     String error = 'Wprowadź poprawne wartości';
 
@@ -131,7 +151,7 @@ class _MyHomePageState extends State<MyHomePage> {
       } else if (result >= 17 && result < 18.6) {
         _group = 'niedowaga';
       } else if (result >= 18.6 && result < 25) {
-        _group = '(waga prawidłowa)';
+        _group = 'waga prawidłowa';
       } else if (result >= 25 && result < 30) {
         _group = 'nadwaga';
       } else if (result >= 30 && result < 35) {
