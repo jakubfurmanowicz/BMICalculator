@@ -137,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
     }
   }
 
-  void CalculateYourBmi() async {
+  void CalculateYourBmi(){
     String error = 'Wprowadź poprawne wartości';
 
     if (!_heightOfBodyController.text.isEmpty) {
