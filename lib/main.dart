@@ -109,7 +109,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     border: OutlineInputBorder(),
                   ),
                   controller: _hightOfBodyController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true),
                 )),
             const Padding(padding: EdgeInsets.only(bottom: 15)),
             const Text('Wpisz wagę w kg:',
@@ -119,23 +120,30 @@ class _MyHomePageState extends State<MyHomePage> {
             SizedBox(
               width: 150,
               child: TextField(
-                style: const TextStyle(color: Colors.white),
-                decoration: const InputDecoration(
-                  border: OutlineInputBorder(),
-                ),
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
                   controller: _weightOfBodyController,
-                  keyboardType: const TextInputType.numberWithOptions(decimal: true)),
+                  keyboardType:
+                      const TextInputType.numberWithOptions(decimal: true)),
             ),
+            const Padding(padding: EdgeInsets.only(bottom: 10)),
             ElevatedButton(
               onPressed: calculateBMI,
               child: const Text(
                 'Oblicz BMI',
-                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+                style:
+                    TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
               ),
               style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
             ),
-            Text('Twoje BMI wynosi: $_result', style: const TextStyle(color: Colors.white, fontSize: 15)),
-            Text(_group, style: const TextStyle(color: Colors.white, fontSize: 15))
+            const Padding(padding: EdgeInsets.only(bottom: 7.5)),
+            Text('Twoje BMI wynosi: $_result',
+                style: const TextStyle(color: Colors.white, fontSize: 15)),
+            const Padding(padding: EdgeInsets.only(bottom: 3)),
+            Text(_group,
+                style: const TextStyle(color: Colors.white, fontSize: 15))
           ],
         ),
       ),
