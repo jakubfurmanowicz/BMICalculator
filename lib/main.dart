@@ -84,6 +84,9 @@ class _MyHomePageState extends State<MyHomePage> {
         _result = result.toStringAsFixed(2);
         _group = 'otyłość III stopnia';
       }
+    } else {
+      _result = 'Wpisz prawidłową wartość';
+      _group = '';
     }
 
     setState(() {});
