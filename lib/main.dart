@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,7 +12,6 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,7 +24,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: MyHomePage(title: ''),
     );
   }
 }
@@ -39,112 +38,113 @@ class MyHomePage extends StatefulWidget {
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
+// class Calculate {
+//   String hight = '';
+//   String weight = '';
+//
+//   void CalculateBMI() {
+//   }
+// }
+
 class _MyHomePageState extends State<MyHomePage> {
-  final TextEditingController _heightOfBodyController = TextEditingController();
+  final TextEditingController _hightOfBodyController = TextEditingController();
   final TextEditingController _weightOfBodyController = TextEditingController();
   String _result = '';
-  String _error = '';
   String _group = '';
+
+  void calculateBMI() {
+    double hight = double.parse(_hightOfBodyController.text) / 100;
+    double weight = double.parse(_weightOfBodyController.text);
+
+    if (_hightOfBodyController.text.isNotEmpty ||
+        _weightOfBodyController.text.isNotEmpty) {
+      double result = weight / (hight * hight);
+      if (result < 16) {
+        _result = result.toStringAsFixed(2);
+        _group = 'wygłodzenie';
+      } else if (result >= 16 && result < 17) {
+        _result = result.toStringAsFixed(2);
+        _group = 'wychudzenie';
+      } else if (result >= 17 && result < 18.6) {
+        _result = result.toStringAsFixed(2);
+        _group = 'niedowaga';
+      } else if (result >= 18.6 && result < 25) {
+        _result = result.toStringAsFixed(2);
+        _group = '(waga prawidłowa)';
+      } else if (result >= 25 && result < 30) {
+        _result = result.toStringAsFixed(2);
+        _group = 'nadwaga';
+      } else if (result >= 30 && result < 35) {
+        _result = result.toStringAsFixed(2);
+        _group = 'otyłość I stopnia';
+      } else if (result >= 35 && result < 40) {
+        _result = result.toStringAsFixed(2);
+        _group = 'otyłość II stopnia';
+      } else if (result >= 40) {
+        _result = result.toStringAsFixed(2);
+        _group = 'otyłość III stopnia';
+      }
+    }
+
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
-        body: Container(
-            decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topRight,
-                end: Alignment.bottomLeft,
-                colors: [
-                  Colors.blue,
-                  Colors.red
-                ]
-              ),
+      backgroundColor: Colors.lightBlue,
+      body: Center(
+        child: Column(
+          children: [
+            const Padding(padding: EdgeInsets.only(top: 40)),
+            const Text('Wpisz wzrost w cm:',
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400)),
+            const Padding(padding: EdgeInsets.only(bottom: 5)),
+            SizedBox(
+                width: 150,
+                child: TextField(
+                  style: const TextStyle(color: Colors.white),
+                  decoration: const InputDecoration(
+                    border: OutlineInputBorder(),
+                  ),
+                  controller: _hightOfBodyController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true),
+                )),
+            const Padding(padding: EdgeInsets.only(bottom: 15)),
+            const Text('Wpisz wagę w kg:',
+                style: TextStyle(
+                    color: Colors.white, fontWeight: FontWeight.w400)),
+            const Padding(padding: EdgeInsets.only(bottom: 5)),
+            SizedBox(
+              width: 150,
+              child: TextField(
+                style: const TextStyle(color: Colors.white),
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                ),
+                  controller: _weightOfBodyController,
+                  keyboardType: const TextInputType.numberWithOptions(decimal: true)),
             ),
-            child: Center(
-                child: SingleChildScrollView(
-              child: Column(children: [
-                Padding(padding: EdgeInsets.only(top: 20)),
-                Text(
-                  'Podaj wagę w kg:',
-                  style: TextStyle(fontSize: 18, color: Colors.white),
-                ),
-                Container(
-                  width: 150,
-                  height: 25,
-                  child: TextField(
-                    controller: _weightOfBodyController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(border: OutlineInputBorder()),
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 5)),
-                Text('Podaj wzrost w cm:',
-                    style: TextStyle(fontSize: 18, color: Colors.white)),
-                Container(
-                  width: 150,
-                  height: 25,
-                  child: TextField(
-                    controller: _heightOfBodyController,
-                    keyboardType: TextInputType.number,
-                    decoration: InputDecoration(border: OutlineInputBorder()),
-                  ),
-                ),
-                Padding(padding: EdgeInsets.only(top: 10)),
-                ElevatedButton(
-                    onPressed: CalculateYourBmi,
-                    style:
-                        ElevatedButton.styleFrom(primary: Colors.blue),
-                    child:
-                        const Text('Oblicz', style: TextStyle(fontSize: 18))),
-                Padding(padding: EdgeInsets.only(top: 10)),
-                Text(
-                  'BMI wynosi: ${_result}${_group}',
-                  style: TextStyle(fontSize: 20, color: Colors.indigo),
-                ),
-                Text(
-                  '$_group',
-                  style: TextStyle(color: Colors.white, fontSize: 20),
-                ),
-                Padding(padding: EdgeInsets.only(top: 10)),
-                Text('$_error')
-              ]),
-            ))));
+            ElevatedButton(
+              onPressed: calculateBMI,
+              child: const Text(
+                'Oblicz BMI',
+                style: TextStyle(color: Colors.white, fontWeight: FontWeight.w700),
+              ),
+              style: ElevatedButton.styleFrom(primary: Colors.amberAccent),
+            ),
+            Text('Twoje BMI wynosi: $_result', style: const TextStyle(color: Colors.white, fontSize: 15)),
+            Text(_group, style: const TextStyle(color: Colors.white, fontSize: 15))
+          ],
+        ),
+      ),
+    );
   }
 
-  void CalculateYourBmi() async {
-    String error = 'Wprowadź poprawne wartości';
-
-    if (!_heightOfBodyController.text.isEmpty) {
-      double weight = double.parse(_weightOfBodyController.text);
-      double hight = double.parse(_heightOfBodyController.text) / 100;
-      double result = weight / (hight * hight);
-      if (result < 16) {
-        _group = 'wygłodzenie';
-      } else if (result >= 16 && result < 17) {
-        _group = 'wychudzenie';
-      } else if (result >= 17 && result < 18.6) {
-        _group = 'niedowaga';
-      } else if (result >= 18.6 && result < 25) {
-        _group = '(waga prawidłowa)';
-      } else if (result >= 25 && result < 30) {
-        _group = 'nadwaga';
-      } else if (result >= 30 && result < 35) {
-        _group = 'otyłość I stopnia';
-      } else if (result >= 35 && result < 40) {
-        _group = 'otyłość II stopnia';
-      } else if (result >= 40) {
-        _group = 'otyłość III stopnia';
-      }
-      _result = result.toStringAsFixed(2);
-    } else {
-      _error = error;
-    }
-    setState(() {});
-  }
+// void przypisz() {
+//   calculate.hight = _hightOfBodyController.text;
+//   calculate.weight = _weightOfBodyController.text;
+//   setState(() {});
+// }
 }
