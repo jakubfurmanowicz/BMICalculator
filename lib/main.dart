@@ -28,23 +28,21 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   final TextEditingController _heightOfBodyController = TextEditingController();
   final TextEditingController _weightOfBodyController = TextEditingController();
-  String _result = '';
   String _group = '';
   String _error = '';
   int _age = 23;
   bool _isEnable = true;
 
+  CalculateBMI calculateBMI = CalculateBMI();
 
   @override
   Widget build(BuildContext context) {
-    CalculateBMI calculateBMI = CalculateBMI();
-
     return Scaffold(
       body: Container(
         constraints: const BoxConstraints(
             minWidth: double.infinity, minHeight: double.infinity),
         decoration:
-        BoxDecoration(gradient: calculateBMI.getGradientByGroup(_group)),
+            BoxDecoration(gradient: calculateBMI.getGradientByGroup(_group)),
         child: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.all(10),
@@ -113,12 +111,12 @@ class _MyHomePageState extends State<MyHomePage> {
                               style: const TextStyle(color: Colors.white),
                               controller: _weightOfBodyController,
                               keyboardType:
-                              const TextInputType.numberWithOptions(
-                                  decimal: true),
+                                  const TextInputType.numberWithOptions(
+                                      decimal: true),
                               decoration: const InputDecoration(
                                   focusedBorder: OutlineInputBorder(
                                       borderSide:
-                                      BorderSide(color: Colors.white54)),
+                                          BorderSide(color: Colors.white54)),
                                   border: OutlineInputBorder(),
                                   contentPadding: EdgeInsets.only(
                                       left: 5, top: 0, bottom: 0, right: 3))),
@@ -130,7 +128,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       children: [
                         const Text('Podaj wzrost w cm:',
                             style:
-                            TextStyle(fontSize: 18, color: Colors.white)),
+                                TextStyle(fontSize: 18, color: Colors.white)),
                         const Padding(padding: EdgeInsets.only(bottom: 3)),
                         SizedBox(
                           width: 150,
@@ -143,7 +141,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             decoration: const InputDecoration(
                                 focusedBorder: OutlineInputBorder(
                                     borderSide:
-                                    BorderSide(color: Colors.white54)),
+                                        BorderSide(color: Colors.white54)),
                                 border: OutlineInputBorder(),
                                 contentPadding: EdgeInsets.only(
                                     left: 5, top: 0, bottom: 0, right: 3)),
@@ -157,25 +155,20 @@ class _MyHomePageState extends State<MyHomePage> {
                 ElevatedButton(
                     onPressed: () {
                       calculateBMI.calculateYourBmi(
-                          double.parse(_heightOfBodyController.text),
-                          double.parse(_weightOfBodyController.text));
+                          _heightOfBodyController.text,
+                          _weightOfBodyController.text);
+                      setState(() {});
                     },
-                    //     () {
-                    //   calculateYourBmi(
-                    //       double.parse(_heightOfBodyController.text),
-                    //       double.parse(_weightOfBodyController.text));
-                    // },
                     style: ElevatedButton.styleFrom(primary: Colors.blue),
                     child:
-                    const Text('Oblicz', style: TextStyle(fontSize: 18))),
+                        const Text('Oblicz', style: TextStyle(fontSize: 18))),
                 const Padding(padding: EdgeInsets.only(top: 10)),
                 Text(
-                  'BMI wynosi: ${calculateBMI.calculateYourBmi(double.parse(_heightOfBodyController.text),
-                      double.parse(_weightOfBodyController.text))}',
+                  'BMI wynosi: ${calculateBMI.result.toStringAsFixed(2)}',
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 Text(
-                  'Twoja grupa: $_group',
+                  'Twoja grupa: ${calculateBMI._group}',
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -193,7 +186,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   void decreaseAge() {
     if (_age == 17) {
-      _age = 18;
+      _age = 17;
       _error = 'Dla osób poniżej 18 lat wynik może być nie adekwatny';
       _isEnable = false;
     } else {
@@ -216,84 +209,39 @@ class _MyHomePageState extends State<MyHomePage> {
     }
     setState(() {});
   }
-
-//void calculateYourBmi(double _high, double _weight) {
-//  // double weight = double.parse(_weightOfBodyController.text);
-//  // double high = double.parse(_heightOfBodyController.text) / 100;
-//  double weight = _weight;
-//  double high = _high / 100;
-//  double result = weight / (high * high);
-//  if (_heightOfBodyController.text.isNotEmpty &&
-//      _weightOfBodyController.text.isNotEmpty &&
-//      weight > 0 &&
-//      high > 0) {
-//    if (_age >= 18 && _age <= 24) {
-//      if (result >= 19 && result <= 24) {
-//        _group = 'waga prawidłowa';
-//      } else if (result > 24) {
-//        _group = 'nadwaga';
-//      } else if (result < 19) {
-//        _group = 'niedowaga';
-//      }
-//    } else if (_age >= 25 && _age <= 34) {
-//      if (result >= 20 && result <= 25) {
-//        _group = 'waga prawidłowa';
-//      } else if (result > 25) {
-//        _group = 'nadwaga';
-//      } else if (result < 20) {
-//        _group = 'niedowaga';
-//      }
-//    } else if (_age >= 35 && _age <= 44) {
-//      if (result >= 21 && result <= 26) {
-//        _group = 'waga prawidłowa';
-//      } else if (result > 26) {
-//        _group = 'nadwaga';
-//      } else if (result < 21) {
-//        _group = 'niedowaga';
-//      }
-//    } else if (_age >= 45 && _age <= 54) {
-//      if (result >= 23 && result <= 28) {
-//        _group = 'waga prawidłowa';
-//      } else if (result > 28) {
-//        _group = 'nadwaga';
-//      } else if (result < 23) {
-//        _group = 'niedowaga';
-//      }
-//    } else if (_age >= 55) {
-//      if (result >= 24 && result <= 29) {
-//        _group = 'waga prawidłowa';
-//      } else if (result > 29) {
-//        _group = 'nadwaga';
-//      } else if (result < 24) {
-//        _group = 'niedowaga';
-//      }
-//    }
-//    _result = result.toStringAsFixed(2);
-//  } else {
-//    _result = '';
-//    _group = '';
-//  }
-//  setState(() {});
-//}
 }
 
 class CalculateBMI {
+  double? _height;
 
-  double? height;
+  double? _weight;
 
-  double? weight;
+  double _result = 0;
 
-  double? result;
+  String? _group;
 
-  double? calculateYourBmi(double high, double weight) {
-    height = high / 100;
-    this.weight = weight;
+  void calculateYourBmi(String enteredHigh, String enteredWeight) {
+    if (enteredHigh.isNotEmpty && enteredWeight.isNotEmpty) {
+      double? parsedHeight = double.tryParse(enteredHigh);
+      double? parsedWeight = double.tryParse(enteredWeight);
 
+      if (parsedHeight != null && parsedWeight != null) {
+        _height = parsedHeight / 100;
+        _weight = parsedWeight;
 
-    result = weight / (high * high);
-
-    return height;
+        _result = _weight! / (_height! * _height!);
+        if (_result < 20){
+          _group = 'niedowaga';
+        } else if ()
+      } else {
+        _result = 0;
+      }
+    } else {
+      _result = 0;
+    }
   }
+
+  double get result => _result;
 
   LinearGradient? getGradientByGroup(String group) {
     if (group == 'wychudzenie' ||
