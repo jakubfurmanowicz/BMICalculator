@@ -42,7 +42,7 @@ class _MyHomePageState extends State<MyHomePage> {
         constraints: const BoxConstraints(
             minWidth: double.infinity, minHeight: double.infinity),
         decoration:
-            BoxDecoration(gradient: calculateBMI.getGradientByGroup(_group)),
+          const BoxDecoration(color: Colors.black),
         child: SingleChildScrollView(
           child: Container(
             margin: const EdgeInsets.all(10),
@@ -168,7 +168,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   style: const TextStyle(fontSize: 20, color: Colors.white),
                 ),
                 Text(
-                  'Twoja grupa: ${calculateBMI._group}',
+                  'Twoja grupa: ${calculateBMI.group}',
                   style: const TextStyle(color: Colors.white, fontSize: 20),
                 ),
                 const Padding(padding: EdgeInsets.only(top: 10)),
@@ -218,7 +218,7 @@ class CalculateBMI {
 
   double _result = 0;
 
-  String? _group;
+  String _group = 'waga prawidłowa';
 
   void calculateYourBmi(String enteredHigh, String enteredWeight) {
     if (enteredHigh.isNotEmpty && enteredWeight.isNotEmpty) {
@@ -228,11 +228,13 @@ class CalculateBMI {
       if (parsedHeight != null && parsedWeight != null) {
         _height = parsedHeight / 100;
         _weight = parsedWeight;
-
         _result = _weight! / (_height! * _height!);
-        if (_result < 20){
+        
+        if (_result < 20) {
           _group = 'niedowaga';
-        } else if ()
+        } else if (_result > 25) {
+          _group = 'nadwaga';
+        }
       } else {
         _result = 0;
       }
@@ -241,30 +243,6 @@ class CalculateBMI {
     }
   }
 
+  String get group => _group;
   double get result => _result;
-
-  LinearGradient? getGradientByGroup(String group) {
-    if (group == 'wychudzenie' ||
-        group == 'niedowaga' ||
-        group == 'wygłodzenie') {
-      return const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color(0xff1b1893), Color(0xff4aa9ed)]);
-    } else if (group == 'waga prawidłowa' || group.isEmpty) {
-      return const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color(0xff1c9e19), Color(0xff7df24c)]);
-    } else if (group == 'nadwaga' ||
-        group == 'otyłość I stopnia' ||
-        group == 'otyłość II stopnia' ||
-        group == 'otyłość III stopnia') {
-      return const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          colors: [Color(0xff6c0b0b), Color(0xffc21919)]);
-    }
-    return null;
-  }
 }
