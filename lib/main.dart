@@ -1,6 +1,6 @@
 import 'package:bmi_calculator/bmi_set_age.dart';
 import 'package:bmi_calculator/bmi_text_field.dart';
-import 'package:bmi_calculator/bmi_text_result.dart';
+import 'package:bmi_calculator/calculate_show_result.dart';
 import 'package:bmi_calculator/calculator_bmi.dart';
 import 'package:flutter/material.dart';
 
@@ -35,6 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   CalculateBMI calculateBMI = CalculateBMI();
   SetYourAge setYourAge = SetYourAge();
+  ShowResult showResult = ShowResult();
 
   @override
   Widget build(BuildContext context) {
@@ -143,9 +144,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                         onPressed: () {
                           calculateBMI.calculateYourBmi(
-                              _heightOfBodyController.text,
-                              _weightOfBodyController.text,
-                              setYourAge.age);
+                              double.parse(_heightOfBodyController.text),
+                              double.parse(_weightOfBodyController.text));
                           setState(() {});
                         },
                         style: ElevatedButton.styleFrom(
@@ -153,7 +153,11 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: const Text('Oblicz',
                             style: TextStyle(fontSize: 18))),
                     const Padding(padding: EdgeInsets.only(top: 20)),
-                    BmiTextResult(group: calculateBMI.group, result: calculateBMI.result.toStringAsFixed(2), error: calculateBMI.error)
+                    Text(
+                      'BMI wynosi: ${calculateBMI.result?.toStringAsFixed(2)}',
+                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 3)),
                   ],
                 ),
               ),
