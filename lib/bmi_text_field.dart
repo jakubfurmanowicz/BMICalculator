@@ -21,10 +21,10 @@ class BmiTextField extends StatelessWidget {
         const Padding(padding: EdgeInsets.only(bottom: 3)),
         SizedBox(
           width: 100,
-          height: 25,
+          height: 50,
           child: TextField(
             enabled: isEnable,
-            style: const TextStyle(color: Colors.white),
+            style: const TextStyle(fontSize: 16,color: Colors.white),
             controller: controller,
             keyboardType: const TextInputType.numberWithOptions(decimal: true),
             decoration: const InputDecoration(

@@ -63,10 +63,11 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.w800,
                               color: Colors.white)),
                     ),
+                    const Padding(padding: EdgeInsets.only(top: 25)),
                     const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'What are you?',
+                        'Who are you?',
                         style: TextStyle(color: Colors.white70),
                       ),
                     ),
@@ -75,42 +76,64 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: Alignment.topLeft,
                         child: Row(
                           children: [
-                            ElevatedButton(
-                              onPressed: () {
-                                changeButtonColor.firstButtonPressed();
-                                setState(() {});
-                              },
-                              child: const Icon(Icons.male),
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color(changeButtonColor.firstColor),
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(10)),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    changeButtonColor.firstButtonPressed();
+                                    setState(() {});
+                                  },
+                                  child: const Icon(Icons.male),
+                                  style: ElevatedButton.styleFrom(
+                                      primary:
+                                          Color(changeButtonColor.firstColor),
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(20)),
+                                ),
+                                const Padding(padding: EdgeInsets.only(top: 5)),
+                                const Text(
+                                  'Male',
+                                  style: TextStyle(color: Colors.white70),
+                                )
+                              ],
                             ),
-                            ElevatedButton(
-                              onPressed: () {
-                                changeButtonColor.secondButtonPressed();
-                                setState(() {});
-                              },
-                              child: const Icon(Icons.female),
-                              style: ElevatedButton.styleFrom(
-                                  primary: Color(changeButtonColor.secondColor),
-                                  shape: const CircleBorder(),
-                                  padding: const EdgeInsets.all(10)),
-                            )
+                            const Padding(padding: EdgeInsets.only(right: 40)),
+                            Column(
+                              children: [
+                                ElevatedButton(
+                                  onPressed: () {
+                                    changeButtonColor.secondButtonPressed();
+                                    setState(() {});
+                                  },
+                                  child: const Icon(Icons.female),
+                                  style: ElevatedButton.styleFrom(
+                                      primary:
+                                          Color(changeButtonColor.secondColor),
+                                      shape: const CircleBorder(),
+                                      padding: const EdgeInsets.all(20)),
+                                ),
+                                const Padding(padding: EdgeInsets.only(top: 5)),
+                                const Text(
+                                  'Female',
+                                  style: TextStyle(color: Colors.white70),
+                                )
+                              ],
+                            ),
                           ],
                         )),
-                    const Padding(padding: EdgeInsets.only(top: 8)),
+                    const Padding(padding: EdgeInsets.only(top: 30)),
                     const Divider(
                       height: 1,
                       thickness: 1,
                       color: Colors.white60,
                     ),
+                    const Padding(padding: EdgeInsets.only(top: 30)),
                     const Padding(padding: EdgeInsets.only(top: 8)),
                     const Align(
                       alignment: Alignment.topLeft,
                       child: Text(
-                        'Jaki jest twój wiek?',
-                        style: TextStyle(fontSize: 12, color: Colors.white),
+                        "What's your age?",
+                        style: TextStyle(fontSize: 12, color: Colors.white70),
                       ),
                     ),
                     // const Padding(padding: EdgeInsets.only(top: 8)),
@@ -157,23 +180,33 @@ class _MyHomePageState extends State<MyHomePage> {
                         ),
                       ],
                     ),
+                    const Padding(padding: EdgeInsets.only(top: 30)),
                     const Divider(
                       height: 1,
                       thickness: 1,
                       color: Colors.white60,
                     ),
-                    const Padding(padding: EdgeInsets.only(bottom: 8)),
+                    const Padding(padding: EdgeInsets.only(bottom: 30)),
                     Row(
                       children: [
                         BmiTextField(
                             isEnable: true,
                             controller: _weightOfBodyController,
-                            label: 'Podaj wagę w kg:'),
-                        const Padding(padding: EdgeInsets.only(left: 100)),
+                            label: "What's your weight?"),
+                        const Align(
+                          alignment: Alignment.bottomLeft,
+                          child: Text(
+                            'kg',
+                            style: TextStyle(color: Colors.white70),
+                          ),
+                        ),
+                        const Padding(
+                          padding: EdgeInsets.only(right: 50),
+                        ),
                         BmiTextField(
                             isEnable: true,
                             controller: _heightOfBodyController,
-                            label: 'Podaj wzrost w cm:')
+                            label: "What's your height?"),
                       ],
                     ),
                     const Padding(padding: EdgeInsets.only(top: 10)),
@@ -187,9 +220,14 @@ class _MyHomePageState extends State<MyHomePage> {
                           setState(() {});
                         },
                         style: ElevatedButton.styleFrom(
-                            primary: const Color(0xff32e66a)),
-                        child: const Text('Oblicz',
-                            style: TextStyle(fontSize: 18))),
+                            primary: const Color(0xff59d995),
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(30)),
+                            padding: const EdgeInsets.only(
+                                left: 50, right: 50, top: 10, bottom: 10)),
+                        child: const Text('Calculate Your BMI',
+                            style:
+                                TextStyle(fontSize: 18, color: Colors.black))),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     Text(
                       'BMI wynosi: ${calculateBMI.result.toStringAsFixed(2)}',
