@@ -14,7 +14,7 @@ class BmiTextField extends StatelessWidget {
       Column(
       children: [
         Text(label,
-            style: TextStyle(
+            style: const TextStyle(
               fontSize: 12,
               color: Colors.white,
             )),

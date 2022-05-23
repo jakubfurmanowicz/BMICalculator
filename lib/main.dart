@@ -1,6 +1,6 @@
 import 'package:bmi_calculator/bmi_set_age.dart';
 import 'package:bmi_calculator/bmi_text_field.dart';
-import 'package:bmi_calculator/calculate_show_result.dart';
+import 'package:bmi_calculator/button_change_color.dart';
 import 'package:bmi_calculator/calculator_bmi.dart';
 import 'package:flutter/material.dart';
 
@@ -35,7 +35,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   CalculateBMI calculateBMI = CalculateBMI();
   SetYourAge setYourAge = SetYourAge();
-  ShowResult showResult = ShowResult();
+  ChangeButtonColor changeButtonColor = ChangeButtonColor();
 
   @override
   Widget build(BuildContext context) {
@@ -63,6 +63,42 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontWeight: FontWeight.w800,
                               color: Colors.white)),
                     ),
+                    const Align(
+                      alignment: Alignment.topLeft,
+                      child: Text(
+                        'What are you?',
+                        style: TextStyle(color: Colors.white70),
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.only(top: 20)),
+                    Align(
+                        alignment: Alignment.topLeft,
+                        child: Row(
+                          children: [
+                            ElevatedButton(
+                              onPressed: () {
+                                changeButtonColor.firstButtonPressed();
+                                setState(() {});
+                              },
+                              child: const Icon(Icons.male),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(changeButtonColor.firstColor),
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(10)),
+                            ),
+                            ElevatedButton(
+                              onPressed: () {
+                                changeButtonColor.secondButtonPressed();
+                                setState(() {});
+                              },
+                              child: const Icon(Icons.female),
+                              style: ElevatedButton.styleFrom(
+                                  primary: Color(changeButtonColor.secondColor),
+                                  shape: const CircleBorder(),
+                                  padding: const EdgeInsets.all(10)),
+                            )
+                          ],
+                        )),
                     const Padding(padding: EdgeInsets.only(top: 8)),
                     const Divider(
                       height: 1,
@@ -144,8 +180,10 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                         onPressed: () {
                           calculateBMI.calculateYourBmi(
-                              double.parse(_heightOfBodyController.text),
-                              double.parse(_weightOfBodyController.text));
+                              _heightOfBodyController.text,
+                              _weightOfBodyController.text,
+                              setYourAge.age,
+                              changeButtonColor.whichPersonIsChoose);
                           setState(() {});
                         },
                         style: ElevatedButton.styleFrom(
@@ -154,7 +192,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             style: TextStyle(fontSize: 18))),
                     const Padding(padding: EdgeInsets.only(top: 20)),
                     Text(
-                      'BMI wynosi: ${calculateBMI.result?.toStringAsFixed(2)}',
+                      'BMI wynosi: ${calculateBMI.result.toStringAsFixed(2)}',
                       style: const TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     const Padding(padding: EdgeInsets.only(top: 3)),

@@ -8,6 +8,7 @@ class SetYourAge {
       age++;
       return age;
     }
+    return null;
   }
 
   int? decreaseAge() {
@@ -17,5 +18,6 @@ class SetYourAge {
       age--;
       return age;
     }
+    return null;
   }
 }

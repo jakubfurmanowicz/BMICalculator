@@ -3,7 +3,7 @@ class ShowResult {
 
   String? showBmi(double enteredResult, int enteredAge) {
     bmiResult = enteredResult;
-    print(bmiResult);
+    return null;
     // return bmiResult?.toStringAsFixed(2);
   }
 }
