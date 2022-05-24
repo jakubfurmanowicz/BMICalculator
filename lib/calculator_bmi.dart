@@ -29,11 +29,13 @@ class CalculateBMI {
       double? parsedHeight = double.tryParse(enteredHigh);
       double? parsedWeight = double.tryParse(enteredWeight);
 
+
       if (parsedHeight != null && parsedWeight != null) {
         _height = parsedHeight / 100;
         _weight = parsedWeight;
         _result = _weight! / (_height! * _height!);
         _error = '';
+
 
         if (enteredAge >= 18 && enteredAge <= 24) {
           if (_result >= 19 && _result <= 24) {

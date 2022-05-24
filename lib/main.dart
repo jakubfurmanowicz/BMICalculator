@@ -2,6 +2,7 @@ import 'package:bmi_calculator/bmi_set_age.dart';
 import 'package:bmi_calculator/bmi_text_field.dart';
 import 'package:bmi_calculator/button_change_color.dart';
 import 'package:bmi_calculator/calculator_bmi.dart';
+import 'package:bmi_calculator/result_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -218,6 +219,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               setYourAge.age,
                               changeButtonColor.whichPersonIsChoose);
                           setState(() {});
+                          Navigator.push(context,
+                          MaterialPageRoute(builder: (context) =>  ResultPage(result: calculateBMI.result.toStringAsFixed(2))));
                         },
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xff59d995),
@@ -229,9 +232,9 @@ class _MyHomePageState extends State<MyHomePage> {
                             style:
                                 TextStyle(fontSize: 18, color: Colors.black))),
                     const Padding(padding: EdgeInsets.only(top: 20)),
-                    Text(
-                      'BMI wynosi: ${calculateBMI.result.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
+                    const Text(
+                      'BMI wynosi:',
+                      style: TextStyle(fontSize: 16, color: Colors.white),
                     ),
                     const Padding(padding: EdgeInsets.only(top: 3)),
                   ],
