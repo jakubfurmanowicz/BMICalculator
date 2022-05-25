@@ -13,15 +13,13 @@ class CalculateBMI {
 //    }
 //  }
 
-  double? _height;
+  double? _height = 0;
 
-  double? _weight;
+  double? _weight = 0;
 
   double _result = 0;
 
-  String _group = '';
-
-  String _error = '';
+  String _group = 'Normal';
 
   void calculateYourBmi(String enteredHigh, String enteredWeight,
       int enteredAge, String personChoosen) {
@@ -33,83 +31,63 @@ class CalculateBMI {
         _height = parsedHeight / 100;
         _weight = parsedWeight;
         _result = _weight! / (_height! * _height!);
-        _error = '';
 
         if (enteredAge >= 18 && enteredAge <= 24) {
           if (_result >= 19 && _result <= 24) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 24) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 19) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
         } else if (enteredAge >= 25 && enteredAge <= 34) {
           if (_result >= 20 && _result <= 25) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 25) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 20) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
         } else if (enteredAge >= 35 && enteredAge <= 44) {
           if (_result >= 21 && _result <= 26) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 26) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 21) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
         } else if (enteredAge >= 45 && enteredAge <= 54) {
           if (_result >= 22 && _result <= 27) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 27) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 22) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
         } else if (enteredAge >= 55 && enteredAge <= 64) {
           if (_result >= 23 && _result <= 28) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 28) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 23) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
         } else if (enteredAge >= 65) {
           if (_result >= 24 && _result <= 29) {
-            _group = 'waga prawidłowa';
-            _error = '';
+            _group = 'You have Normal body weight!';
           } else if (_result > 29) {
-            _group = 'nadwaga';
-            _error = '';
+            _group = 'You have Overweight body weight!';
           } else if (_result < 24) {
-            _group = 'niedowaga';
-            _error = '';
+            _group = 'You have Underweight body weight!';
           }
-        } else if (enteredAge < 18 || enteredAge > 120) {
         }
       } else {
-        _error = 'Pole nie może być puste';
         _result = 0;
+        _group = "Field can't be empty, or equal zero";
       }
     } else {
-      _error = 'Pole nie może być puste';
       _result = 0;
+      _group = "Field can't be empty, or equal zero";
     }
   }
 
@@ -117,5 +95,4 @@ class CalculateBMI {
 
   double get result => _result;
 
-  String get error => _error;
 }

@@ -2,6 +2,7 @@ import 'package:bmi_calculator/bmi_set_age.dart';
 import 'package:bmi_calculator/bmi_text_field.dart';
 import 'package:bmi_calculator/button_change_color.dart';
 import 'package:bmi_calculator/calculator_bmi.dart';
+import 'package:bmi_calculator/result_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -51,7 +52,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: SingleChildScrollView(
               keyboardDismissBehavior: ScrollViewKeyboardDismissBehavior.onDrag,
               child: Container(
-                margin: const EdgeInsets.all(30),
+                margin: const EdgeInsets.only(top: 20, left: 20, right: 20),
                 child: Column(
                   children: [
                     const Padding(padding: EdgeInsets.only(top: 20)),
@@ -136,7 +137,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         style: TextStyle(fontSize: 12, color: Colors.white70),
                       ),
                     ),
-                    // const Padding(padding: EdgeInsets.only(top: 8)),
+                    const Padding(padding: EdgeInsets.only(top: 8)),
                     Row(
                       children: [
                         Text(setYourAge.age.toString(),
@@ -193,23 +194,42 @@ class _MyHomePageState extends State<MyHomePage> {
                             isEnable: true,
                             controller: _weightOfBodyController,
                             label: "What's your weight?"),
+                        const Padding(padding: EdgeInsets.only(top: 30)),
                         const Align(
-                          alignment: Alignment.bottomLeft,
-                          child: Text(
-                            'kg',
-                            style: TextStyle(color: Colors.white70),
+                          alignment: FractionalOffset.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 35),
+                            child: (Text(
+                              'Kg',
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                color: Colors.white70,
+                                fontSize: 16,
+                              ),
+                            )),
                           ),
                         ),
                         const Padding(
-                          padding: EdgeInsets.only(right: 50),
+                          padding: EdgeInsets.only(right: 40),
                         ),
                         BmiTextField(
                             isEnable: true,
                             controller: _heightOfBodyController,
                             label: "What's your height?"),
+                        const Align(
+                          alignment: FractionalOffset.bottomCenter,
+                          child: Padding(
+                            padding: EdgeInsets.only(top: 35),
+                            child: Text(
+                              'Cm',
+                              style: TextStyle(
+                                  color: Colors.white70, fontSize: 16),
+                            ),
+                          ),
+                        ),
                       ],
                     ),
-                    const Padding(padding: EdgeInsets.only(top: 10)),
+                    const Padding(padding: EdgeInsets.only(top: 50)),
                     ElevatedButton(
                         onPressed: () {
                           calculateBMI.calculateYourBmi(
@@ -218,6 +238,14 @@ class _MyHomePageState extends State<MyHomePage> {
                               setYourAge.age,
                               changeButtonColor.whichPersonIsChoose);
                           setState(() {});
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => ResultPage(
+                                        result: calculateBMI.result
+                                            .toStringAsFixed(2),
+                                        group: calculateBMI.group,
+                                      )));
                         },
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xff59d995),
@@ -229,11 +257,6 @@ class _MyHomePageState extends State<MyHomePage> {
                             style:
                                 TextStyle(fontSize: 18, color: Colors.black))),
                     const Padding(padding: EdgeInsets.only(top: 20)),
-                    Text(
-                      'BMI wynosi: ${calculateBMI.result.toStringAsFixed(2)}',
-                      style: const TextStyle(fontSize: 16, color: Colors.white),
-                    ),
-                    const Padding(padding: EdgeInsets.only(top: 3)),
                   ],
                 ),
               ),

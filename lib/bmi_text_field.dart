@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
 class BmiTextField extends StatelessWidget {
   const BmiTextField({Key? key, required this.isEnable, required this.controller, required this.label}) : super(key: key);
@@ -20,7 +21,7 @@ class BmiTextField extends StatelessWidget {
             )),
         const Padding(padding: EdgeInsets.only(bottom: 3)),
         SizedBox(
-          width: 100,
+          width: 120,
           height: 50,
           child: TextField(
             enabled: isEnable,
@@ -38,6 +39,9 @@ class BmiTextField extends StatelessWidget {
                 ),
                 contentPadding: EdgeInsets.only(
                     left: 5, top: 0, bottom: 0, right: 3)),
+            inputFormatters: [
+              LengthLimitingTextInputFormatter(3)
+            ],
           ),
         ),
       ],
