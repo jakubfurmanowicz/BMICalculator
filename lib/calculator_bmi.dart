@@ -19,21 +19,16 @@ class CalculateBMI {
 
   double _result = 0;
 
-  String _group = 'Normal';
+  String _group = '';
 
-  void calculateYourBmi(String enteredHigh, String enteredWeight,
-      int enteredAge, String personChoosen) {
+  void calculateYourBmi(String enteredHigh, String enteredWeight, int enteredAge) {
     if (enteredHigh.isNotEmpty && enteredWeight.isNotEmpty) {
       double? parsedHeight = double.tryParse(enteredHigh);
       double? parsedWeight = double.tryParse(enteredWeight);
-
-
       if (parsedHeight != null && parsedWeight != null) {
         _height = parsedHeight / 100;
         _weight = parsedWeight;
         _result = _weight! / (_height! * _height!);
-
-
         if (enteredAge >= 18 && enteredAge <= 24) {
           if (_result >= 19 && _result <= 24) {
             _group = 'You have Normal body weight!';
@@ -96,5 +91,4 @@ class CalculateBMI {
   String get group => _group;
 
   double get result => _result;
-
 }

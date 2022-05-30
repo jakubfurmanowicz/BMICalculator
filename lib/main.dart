@@ -233,19 +233,20 @@ class _MyHomePageState extends State<MyHomePage> {
                     ElevatedButton(
                         onPressed: () {
                           calculateBMI.calculateYourBmi(
-                              _heightOfBodyController.text,
-                              _weightOfBodyController.text,
-                              setYourAge.age,
-                              changeButtonColor.whichPersonIsChoose);
+                            _heightOfBodyController.text,
+                            _weightOfBodyController.text,
+                            setYourAge.age,
+                          );
                           setState(() {});
                           Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => ResultPage(
-                                        result: calculateBMI.result
-                                            .toStringAsFixed(2),
-                                        group: calculateBMI.group,
-                                      )));
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ResultPage(
+                                result: calculateBMI.result.toStringAsFixed(2),
+                                group: calculateBMI.group,
+                              ),
+                            ),
+                          );
                         },
                         style: ElevatedButton.styleFrom(
                             primary: const Color(0xff59d995),

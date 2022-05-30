@@ -20,7 +20,6 @@ class ResultPage extends StatefulWidget {
 
   final String result;
   final String group;
-
   @override
   State<ResultPage> createState() => _ResultPageState();
 }
@@ -56,7 +55,7 @@ class _ResultPageState extends State<ResultPage> {
                 style: const TextStyle(color: Colors.white, fontSize: 40),
               ),
               const Padding(padding: EdgeInsets.only(top: 15)),
-               Text('${widget.group}', style: const TextStyle(color: Color(0xff55dc7f), fontSize: 16),)
+               Text(widget.group, style: const TextStyle(color: Color(0xff55dc7f), fontSize: 16),)
             ],
           ),
         ),
