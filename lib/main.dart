@@ -232,7 +232,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     const Padding(padding: EdgeInsets.only(top: 50)),
                     ElevatedButton(
                         onPressed: () {
-                          calculateBMI.calculateYourBmi(
+                          final result = calculateBMI.calculateYourBmi(
                             _heightOfBodyController.text,
                             _weightOfBodyController.text,
                             setYourAge.age,
@@ -242,8 +242,8 @@ class _MyHomePageState extends State<MyHomePage> {
                             context,
                             MaterialPageRoute(
                               builder: (context) => ResultPage(
-                                result: calculateBMI.result.toStringAsFixed(2),
-                                group: calculateBMI.group,
+                                result: result.result.toStringAsFixed(2),
+                                group: result.result.toString(),
                               ),
                             ),
                           );

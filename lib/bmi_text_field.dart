@@ -40,7 +40,7 @@ class BmiTextField extends StatelessWidget {
                 contentPadding: EdgeInsets.only(
                     left: 5, top: 0, bottom: 0, right: 3)),
             inputFormatters: [
-              LengthLimitingTextInputFormatter(3)
+              LengthLimitingTextInputFormatter(5)
             ],
           ),
         ),

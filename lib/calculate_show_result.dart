@@ -1,9 +1,6 @@
-class ShowResult {
-  double? bmiResult;
+class Result {
+  final String group;
+  final double result;
 
-  String? showBmi(double enteredResult, int enteredAge) {
-    bmiResult = enteredResult;
-    return null;
-    // return bmiResult?.toStringAsFixed(2);
-  }
+  Result(this.group, this.result);
 }

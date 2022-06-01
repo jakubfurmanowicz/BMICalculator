@@ -1,34 +1,14 @@
+import 'package:bmi_calculator/calculate_show_result.dart';
+
 class CalculateBMI {
-//  double? result;
-//  String? error;
-//  double? calculateYourBmi(
-//      double enteredHeight, double enteredWeight) {
-//    if (enteredHeight != null && enteredWeight != null) {
-//      double height = enteredHeight / 100;
-//      double weight = enteredWeight;
-//       result = weight / (height * height);
-//       return result;
-//    } else {
-//      error = 'Pola nie mogą być puste';
-//    }
-//  }
-
-  double? _height = 0;
-
-  double? _weight = 0;
-
-  double _result = 0;
-
-  String _group = '';
-
-  void calculateYourBmi(String enteredHigh, String enteredWeight, int enteredAge) {
+  Result calculateYourBmi(String enteredHigh, String enteredWeight, int enteredAge) {
     if (enteredHigh.isNotEmpty && enteredWeight.isNotEmpty) {
       double? parsedHeight = double.tryParse(enteredHigh);
       double? parsedWeight = double.tryParse(enteredWeight);
       if (parsedHeight != null && parsedWeight != null) {
-        _height = parsedHeight / 100;
-        _weight = parsedWeight;
-        _result = _weight! / (_height! * _height!);
+        parsedHeight = parsedHeight / 100;
+        final _result = parsedWeight / (parsedHeight * parsedHeight);
+        String _group = '';
         if (enteredAge >= 18 && enteredAge <= 24) {
           if (_result >= 19 && _result <= 24) {
             _group = 'You have Normal body weight!';
@@ -78,17 +58,13 @@ class CalculateBMI {
             _group = 'You have Underweight body weight!';
           }
         }
+        return Result(_group, _result);
       } else {
-        _result = 0;
-        _group = "Field can't be empty, or equal zero";
+        return Result("Field can't be empty, or equal zero", 0);
+
       }
     } else {
-      _result = 0;
-      _group = "Field can't be empty, or equal zero";
+      return Result("Field can't be empty, or equal zero", 0);
     }
   }
-
-  String get group => _group;
-
-  double get result => _result;
 }
