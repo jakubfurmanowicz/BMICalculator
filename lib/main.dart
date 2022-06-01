@@ -243,7 +243,7 @@ class _MyHomePageState extends State<MyHomePage> {
                             MaterialPageRoute(
                               builder: (context) => ResultPage(
                                 result: result.result.toStringAsFixed(2),
-                                group: result.result.toString(),
+                                group: result.group.toString(),
                               ),
                             ),
                           );
